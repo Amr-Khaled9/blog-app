@@ -5,10 +5,12 @@ RUN apt-get update && apt-get install -y \
     curl \
     zip \
     unzip \
+    libzip-dev \
     libpng-dev \
     libonig-dev \
     libxml2-dev \
     libcurl4-openssl-dev \
+    libicu-dev \
     pkg-config \
     libssl-dev \
     && docker-php-ext-install \
@@ -18,7 +20,11 @@ RUN apt-get update && apt-get install -y \
         exif \
         pcntl \
         gd \
-        curl
+        intl \
+        zip
+        
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y nodejs
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
